@@ -1,24 +1,26 @@
-name: Build Typst PDFs (container)
+name: Build Typst PDFs
 
 on:
   push:
-    paths: ["**/*.typ"]
-  pull_request:
-    paths: ["**/*.typ"]
+    branches: [main, master]
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/typst/typst:latest
+
     steps:
-      - name: Ensure git exists for checkout
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Typst CLI
         run: |
-          if ! command -v git >/dev/null 2>&1; then
-            apt-get update && apt-get install -y git
-          fi
-      - uses: actions/checkout@v4
+          set -euxo pipefail
+          VER=$(curl -fsSL https://api.github.com/repos/typst/typst/releases/latest | jq -r .tag_name)
+          curl -fsSL -o typst.tar.xz "https://github.com/typst/typst/releases/download/${VER}/typst-x86_64-unknown-linux-gnu.tar.xz"
+          tar -xJf typst.tar.xz
+          sudo mv typst-x86_64-unknown-linux-gnu/typst /usr/local/bin/typst
+          typst --version
 
       - name: Compile all .typ to PDFs
         run: |
