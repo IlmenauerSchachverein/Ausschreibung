@@ -1,0 +1,17 @@
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.bmp binary
+*.pdf binary
+*.zip binary
+*.tar binary
+*.gz binary
+*.7z binary
+*.mp3 binary
+*.mp4 binary
+*.mov binary
+*.exe binary
+*.dll binary
+
+* text eol=lf

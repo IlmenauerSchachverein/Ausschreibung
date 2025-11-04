@@ -1,0 +1,22 @@
+# Typst output files
+*.pdf
+*.log
+*.aux
+*.toc
+*.synctex.gz
+
+# Editor/IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Betriebssystem Dateien
+.DS_Store
+Thumbs.db
+
+# Optional: node_modules, falls Typst-Projekt npm nutzt
+node_modules/
+
+# Optional: Backup-Dateien
+*~
