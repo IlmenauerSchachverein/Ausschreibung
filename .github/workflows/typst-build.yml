@@ -2,8 +2,8 @@ name: Build Typst PDFs
 
 on:
   push:
-    branches: [main, master]   # läuft bei jedem Push auf main oder master
-  workflow_dispatch:            # manuell auslösbar
+    branches: [main, master]   
+  workflow_dispatch:           
 
 concurrency:
   group: typst-${{ github.ref }}
@@ -15,17 +15,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Typst bequem über eine fertige Action
       - name: Setup Typst
         uses: typst-community/setup-typst@v3
         with:
-          typst-version: latest    # optional fixieren, z.B. "0.14.0"
+          typst-version: latest 
 
       - name: Compile all .typ to PDFs
         run: |
           set -euxo pipefail
           mkdir -p build-pdf
-          # Alle versionierten .typ-Dateien rekursiv finden und bauen
           while IFS= read -r f; do
             out="build-pdf/${f%.typ}.pdf"
             mkdir -p "$(dirname "$out")"
@@ -35,7 +33,7 @@ jobs:
       - name: Upload PDFs as one artifact
         uses: actions/upload-artifact@v4
         with:
-          name: typst-pdfs
+          name: Ilmenauer_Schachverein_Ausschreibung
           path: build-pdf/
           if-no-files-found: warn
           retention-days: 14
