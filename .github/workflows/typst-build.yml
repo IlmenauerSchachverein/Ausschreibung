@@ -5,7 +5,6 @@ on:
     branches: [main, master]
   workflow_dispatch:
 
-# Least-privilege for the whole workflow
 permissions:
   contents: read
   actions: write
@@ -25,15 +24,22 @@ jobs:
         with:
           typst-version: latest
 
-      - name: Compile all .typ to PDFs
+      - name: Compile all .typ to PDFs (cd into each file's directory)
+        env:
+          ROOT: ${{ github.workspace }}
         run: |
           set -euxo pipefail
           mkdir -p build-pdf
-          while IFS= read -r f; do
+          git ls-files '*.typ' | while IFS= read -r f; do
+            dir="$(dirname "$f")"
+            base="$(basename "$f")"
             out="build-pdf/${f%.typ}.pdf"
             mkdir -p "$(dirname "$out")"
-            typst compile --root . "$f" "$out"
-          done < <(git ls-files '*.typ')
+            (
+              cd "$dir"
+              typst compile --root "$ROOT" "$base" "$ROOT/$out"
+            )
+          done
 
       - name: Upload PDFs as one artifact
         uses: actions/upload-artifact@v4
