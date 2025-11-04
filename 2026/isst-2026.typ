@@ -71,12 +71,9 @@
   ],
 
   align(right + top)[
-    #image("IlmenauerSV.png", width: 58%)
+    #image("IlmenauerSV.png", width: 68%)
   ],
 )
-
-
-*Rückerstattung:* Bei Abmeldung vor Turnierbeginn wird eine Bearbeitungsgebühr von 10 Euro erhoben, der restliche Betrag wird zurücküberwiesen.
 
 #align(center, text(21pt)[
   https://isst.ilmenauer-schachverein.de
