@@ -1,0 +1,39 @@
+name: Build Typst PDFs (container)
+
+on:
+  push:
+    paths: ["**/*.typ"]
+  pull_request:
+    paths: ["**/*.typ"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/typst/typst:latest
+    steps:
+      - name: Ensure git exists for checkout
+        run: |
+          if ! command -v git >/dev/null 2>&1; then
+            apt-get update && apt-get install -y git
+          fi
+      - uses: actions/checkout@v4
+
+      - name: Compile all .typ to PDFs
+        run: |
+          set -euxo pipefail
+          mkdir -p build-pdf
+          while IFS= read -r f; do
+            out="build-pdf/${f%.typ}.pdf"
+            mkdir -p "$(dirname "$out")"
+            typst compile --root . "$f" "$out"
+          done < <(git ls-files '*.typ')
+
+      - name: Upload PDFs as single artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: typst-pdfs
+          path: build-pdf/
+          if-no-files-found: error
+          retention-days: 14
