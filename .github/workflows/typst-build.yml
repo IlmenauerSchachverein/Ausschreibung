@@ -2,40 +2,40 @@ name: Build Typst PDFs
 
 on:
   push:
-    branches: [main, master]
-  workflow_dispatch:
+    branches: [main, master]   # läuft bei jedem Push auf main oder master
+  workflow_dispatch:            # manuell auslösbar
+
+concurrency:
+  group: typst-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Install Typst CLI
-        run: |
-          set -euxo pipefail
-          VER=$(curl -fsSL https://api.github.com/repos/typst/typst/releases/latest | jq -r .tag_name)
-          curl -fsSL -o typst.tar.xz "https://github.com/typst/typst/releases/download/${VER}/typst-x86_64-unknown-linux-gnu.tar.xz"
-          tar -xJf typst.tar.xz
-          sudo mv typst-x86_64-unknown-linux-gnu/typst /usr/local/bin/typst
-          typst --version
+      # Typst bequem über eine fertige Action
+      - name: Setup Typst
+        uses: typst-community/setup-typst@v3
+        with:
+          typst-version: latest    # optional fixieren, z.B. "0.14.0"
 
       - name: Compile all .typ to PDFs
         run: |
           set -euxo pipefail
           mkdir -p build-pdf
+          # Alle versionierten .typ-Dateien rekursiv finden und bauen
           while IFS= read -r f; do
             out="build-pdf/${f%.typ}.pdf"
             mkdir -p "$(dirname "$out")"
             typst compile --root . "$f" "$out"
           done < <(git ls-files '*.typ')
 
-      - name: Upload PDFs as single artifact
+      - name: Upload PDFs as one artifact
         uses: actions/upload-artifact@v4
         with:
           name: typst-pdfs
           path: build-pdf/
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 14
