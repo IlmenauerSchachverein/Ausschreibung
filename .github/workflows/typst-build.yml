@@ -2,8 +2,13 @@ name: Build Typst PDFs
 
 on:
   push:
-    branches: [main, master]   
-  workflow_dispatch:           
+    branches: [main, master]
+  workflow_dispatch:
+
+# Least-privilege for the whole workflow
+permissions:
+  contents: read
+  actions: write
 
 concurrency:
   group: typst-${{ github.ref }}
@@ -18,7 +23,7 @@ jobs:
       - name: Setup Typst
         uses: typst-community/setup-typst@v3
         with:
-          typst-version: latest 
+          typst-version: latest
 
       - name: Compile all .typ to PDFs
         run: |
