@@ -71,7 +71,7 @@
   ],
 
   align(right + top)[
-    #image("IlmenauerSV.png", width: 58%)
+    #image("2026/IlmenauerSV.png", width: 58%)
   ],
 )
 
