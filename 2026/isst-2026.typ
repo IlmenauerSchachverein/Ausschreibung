@@ -1,12 +1,6 @@
 #set page(paper: "a4", margin: 1.5cm)
 #set heading(numbering: none)
 #set text(font: "Aporetic Serif", size: 14pt)
-/*
-#set page(background: rotate(60deg,
-  text(200pt, fill: rgb("FFCBC4"))[
-    *Entwurf*
-  ]
-))*/
 
 #show link: set text(fill: blue, weight: 700)
 #show link: underline
@@ -21,7 +15,6 @@
 
 *Ort:* Rathaus, „Am Markt 7“, 98693 Ilmenau
 
-*Auswertung:* Es findet keine Auswertung statt
 
 *Kontakt:* Bei Fragen senden Sie bitte eine E-Mail an info\@ilmenauer-schachverein.de
 
@@ -60,9 +53,10 @@
 \* genauere Informationen zur Preisvergabe gibt es online.
 
 = Startgeld
+
 #grid(
   columns: (1fr, auto),
-  gutter: 1cm,
+  gutter: 0.8cm,
 
   align(left)[
     13 Euro, \
@@ -74,14 +68,15 @@
     BIC: HELADEF1ILK \
     Kreditinstitut: Sparkasse Arnstadt-Ilmenau \
     Verwendungszweck: Spielername, ISST2025
-
-    *Rückerstattung:* Bei Abmeldung vor Turnierbeginn wird eine Bearbeitungsgebühr von 10 Euro erhoben, der restliche Betrag wird zurücküberwiesen.
   ],
 
   align(right + top)[
-    #image("IlmenauerSV.png", width: 30%)
+    #image("IlmenauerSV.png", width: 58%)
   ],
 )
+
+
+*Rückerstattung:* Bei Abmeldung vor Turnierbeginn wird eine Bearbeitungsgebühr von 10 Euro erhoben, der restliche Betrag wird zurücküberwiesen.
 
 #align(center, text(21pt)[
   https://isst.ilmenauer-schachverein.de
