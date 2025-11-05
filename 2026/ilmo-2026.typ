@@ -31,7 +31,6 @@
       [], [15 Uhr], [Runde 2],
       [30.10], [9 Uhr], [Runde 3],
       [], [15 Uhr], [Runde 4],
-      [], [20:15 Uhr], [Blitzturnier],
       [31.11], [9 Uhr], [Runde 5],
       [], [15 Uhr], [Runde 6],
       [01.11], [9 Uhr], [Runde 7],
