@@ -6,7 +6,7 @@
 #show link: underline
 
 #align(center, text(24pt)[
-  *32. Ilmenauer Open 2026* \
+  *32. Ilmenauer Schnellschach Turnier 2026* \
 ])
 
 *Termin*: Samstag den 22.08.2026
