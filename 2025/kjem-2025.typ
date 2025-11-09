@@ -24,7 +24,7 @@
 *Termin*: Samstag der #date.#year, Anmeldung bis
 9:30 Uhr, Turnierbeginn 10 Uhr,  ca. 16:30 Uhr Siegerehrung
 
-*Meldung:* Bis zum 08.11.#year über https://kjem.ilmenauer-schachverein.de
+*Meldung:* Bis zum (Donnerstag) 13.11.#year über https://kjem.ilmenauer-schachverein.de
 
 *Ort:* Schülerfreizeitzentrum, „Am Großen Teich“ Ilmenau
 
